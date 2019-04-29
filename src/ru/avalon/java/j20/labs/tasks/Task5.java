@@ -34,8 +34,8 @@ public class Task5 implements Task {
         String path = "resources.strings.titles";
         ResourceBundle origin = read(path);
 
-        Locale local = new Locale("en");
-        ResourceBundle settedUp = read(path, local);
+        Locale local = new Locale("ru");
+        ResourceBundle ruLocale = read(path, local);
     }
 
     /**

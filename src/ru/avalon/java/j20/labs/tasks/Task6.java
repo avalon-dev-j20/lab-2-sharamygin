@@ -3,7 +3,10 @@ package ru.avalon.java.j20.labs.tasks;
 import ru.avalon.java.j20.labs.Task;
 import ru.avalon.java.j20.labs.models.Country;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -49,14 +52,17 @@ public class Task6 implements Task {
      * @throws IOException в случае ошибки ввода-вывода.
      */
     private Collection<Country> read(File file) throws IOException, ParseException {
-        Collection<Country> collection = new ArrayList<>();
+        Collection<Country> countries = new ArrayList<>();
+
         try (FileReader reader = new FileReader(file);
-        BufferedReader buffReader = new BufferedReader(reader)) {
-            while (buffReader.ready()){
-                String country = buffReader.readLine();
-                collection.add(Country.valueOf(country));
+             BufferedReader bufferedReader = new BufferedReader(reader)) {
+
+            while (bufferedReader.ready()){
+                String countryData = bufferedReader.readLine();
+                countries.add(Country.valueOf(countryData));
             }
+
+            return countries;
         }
-                    return collection;
     }
 }

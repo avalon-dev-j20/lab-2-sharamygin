@@ -18,7 +18,7 @@ public class Task4 implements Task {
      */
     @Override
     public void run() throws IOException {
-        Properties properties = read("resources/database");
+        Properties properties = read("resources/database.properties");
 
         /*
          * TODO(Студент): Выполнить задание №4
@@ -38,8 +38,9 @@ public class Task4 implements Task {
      */
     private Properties read(String path) throws IOException {
         Properties props = new Properties();
-        try(InputStream propertReader = ClassLoader.getSystemResourceAsStream(path)) {
-            props.load(propertReader);
+        try (InputStream propsReader = ClassLoader.getSystemResourceAsStream(path)) {
+            props.load(propsReader);
+
             return props;
         }
     }

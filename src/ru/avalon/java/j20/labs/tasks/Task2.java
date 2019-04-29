@@ -54,16 +54,14 @@ public class Task2 implements Task {
      */
     private String read(File file) throws IOException {
         try (Reader reader = new FileReader(file)){
-            StringBuilder strbld = new StringBuilder();
-            char[] buffer = new char[10];
-            int len;
-            
-            while ((len = reader.read(buffer))>0){
-                strbld.append(buffer, 0, len);
+            char[] buffer = new char[8];
+            StringBuilder fileContent = new StringBuilder();
+
+            int amountOfReadSymbols;
+            while ((amountOfReadSymbols = reader.read(buffer)) > 0){
+                fileContent.append(buffer, 0, amountOfReadSymbols);
             }
-            
-            reader.close();
-            return strbld.toString();
+            return fileContent.toString();
         }
     }
 
@@ -76,8 +74,8 @@ public class Task2 implements Task {
      * @throws IOException в случае ошибок ввода-вывода.
      */
     private void write(File file, String text) throws IOException {
-            try (Writer writer = new FileWriter(file)){
-                writer.write(text);
-            }
+        try (Writer writer = new FileWriter(file)){
+            writer.write(text);
+        }
     }
 }

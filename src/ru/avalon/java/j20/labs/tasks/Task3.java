@@ -1,12 +1,8 @@
 package ru.avalon.java.j20.labs.tasks;
 
-import java.io.BufferedReader;
 import ru.avalon.java.j20.labs.Task;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -57,13 +53,14 @@ public class Task3 implements Task {
      * @throws IOException в случае ошибок ввода-вывода.
      */
     private Collection<String> read(File file) throws IOException {
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))){
-            Collection<String> lines = new ArrayList<>();
-            while (reader.ready()){
-                lines.add(reader.readLine());
-            } 
-            return lines;
-    }
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            Collection<String> rowsOfFile = new ArrayList<>();
+
+            while (reader.ready())
+                rowsOfFile.add(reader.readLine());
+
+            return rowsOfFile;
+        }
     }
 
     /**
@@ -77,11 +74,10 @@ public class Task3 implements Task {
      * @throws IOException в случае ошибок ввода-вывода.
      */
     private void write(File file, Collection<String> collection) throws IOException {
-        try (PrintWriter writer = new PrintWriter(file)){
-            List<String> lines = (List<String>) collection;
-            for (String row:lines){
+        try (PrintWriter writer = new PrintWriter(file)) {
+            List<String> rowsOfFile = (List<String>) collection;
+            for (String row : rowsOfFile)
                 writer.println(row);
-            } 
         }
     }
 }

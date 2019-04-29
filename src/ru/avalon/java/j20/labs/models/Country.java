@@ -1,7 +1,9 @@
 package ru.avalon.java.j20.labs.models;
 
+import java.io.IOException;
 import java.text.ParseException;
-import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Модель представления о стране.
@@ -55,9 +57,13 @@ public class Country {
     
     @Override
     public boolean equals(Object object){
-        Country country = (Country) object;
-        return Objects.equals(code, country.code) 
-                && Objects.equals(name, country.name);
+        if (object == this)
+            return true;
+        if (object.getClass() != getClass())
+            return false;
+
+        Country other = (Country)object;
+        return code.equals(other.code) && name.equals(other.name);
     }
 
     /**
@@ -70,15 +76,15 @@ public class Country {
      * имеет неверный формат.
      */
     
-    public Country(String[] strings) {
-        this.code = strings[0];
-        this.name = strings[1];
-    }
-    public static Country valueOf(String text) throws ParseException {
+    public static Country valueOf(String text) throws IOException, ParseException {
         /*
          * TODO(Студент): Реализовать метод valueOf класса Country
          */
-        Country country = new Country(text.split(":"));
-        return country;
+
+        Pattern pattern = Pattern.compile("([A-Z]{2}):([а-яА-Я\\s]*)");
+        Matcher matcher = pattern.matcher(text);
+        if (!matcher.find()) throw new ParseException("Not allowed match", 0);
+        return new Country(matcher.group(1), matcher.group(2));
+
     }
 }

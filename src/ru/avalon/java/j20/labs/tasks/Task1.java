@@ -54,19 +54,19 @@ public class Task1 implements Task {
      */
     private String read(File file) throws IOException {
         try (InputStream reader = new FileInputStream(file)){
-            ByteArrayOutputStream mem = new ByteArrayOutputStream();
-            
-            byte[] buffer =  new byte[10];
-            int len;
-            
-            while ((len = reader.read(buffer))>0){
-                mem.write(buffer, 0, len);
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+
+            byte[] buffer = new byte[10];
+            int amountOfReadBytes;
+
+            while ((amountOfReadBytes = reader.read(buffer)) > 0) {
+                byteArrayOutputStream.write(buffer, 0, amountOfReadBytes);
             }
-            //mem.close();
-            return mem.toString();
-              
+
+            return byteArrayOutputStream.toString();
         }
     }
+
     /**
      * Выполняет запись текстоых данных в файл в двоичном
      * режиме.
@@ -76,8 +76,8 @@ public class Task1 implements Task {
      * @throws IOException в случае ошибок ввода-вывода.
      */
     private void write(File file, String text) throws IOException {
-            try (OutputStream writer = new FileOutputStream(file)){
+        try (OutputStream writer = new FileOutputStream(file)){
             writer.write(text.getBytes());
+        }
     }
-}
 }

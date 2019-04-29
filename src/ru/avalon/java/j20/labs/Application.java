@@ -40,7 +40,7 @@ public class Application {
         try{ 
             for (Task task : tasks) task.run();
         }
-        catch (Exception e){
+        catch (Exception exp){
             System.err.println("Exception");
         }
     }
